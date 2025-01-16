@@ -1,0 +1,287 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > EmployeeService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fiskhumalo.employeeManagement.service</a>
+</div>
+
+<h1>Coverage Summary for Class: EmployeeService (com.fiskhumalo.employeeManagement.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EmployeeService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    18,2%
+  </span>
+  <span class="absValue">
+    (2/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    18,1%
+  </span>
+  <span class="absValue">
+    (13/72)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fiskhumalo.employeeManagement.service;
+&nbsp;
+&nbsp;import com.fiskhumalo.employeeManagement.dao.employeeDao.EmployeeDao;
+&nbsp;
+&nbsp;
+&nbsp;import com.fiskhumalo.employeeManagement.exception.EmailValidationReportException;
+&nbsp;
+&nbsp;import com.fiskhumalo.employeeManagement.exception.IdVerificationResponse;
+&nbsp;import com.fiskhumalo.employeeManagement.exception.RegistrationValidationException;
+&nbsp;import com.fiskhumalo.employeeManagement.exception.ResourceNotFoundException;
+&nbsp;import com.fiskhumalo.employeeManagement.model.employee.Employee;
+&nbsp;import com.fiskhumalo.employeeManagement.model.employee.EmployeeRegistrationRequest;
+&nbsp;import com.fiskhumalo.employeeManagement.model.employee.EmployeeUpdateRequest;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.util.Comparator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Objects;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;@Service
+&nbsp;public class EmployeeService {
+&nbsp;    private final EmployeeDao employeeDao;
+&nbsp;
+<b class="fc">&nbsp;    public EmployeeService(EmployeeDao employeeDao) {</b>
+<b class="fc">&nbsp;        this.employeeDao = employeeDao;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Employee&gt; displayAllEmployees() {
+<b class="nc">&nbsp;        return employeeDao.getAllEmployees();</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Employee getEmployeeById(Long id) {
+<b class="nc">&nbsp;        return employeeDao.getEmployeeById(id)</b>
+<b class="nc">&nbsp;                .orElseThrow(</b>
+<b class="nc">&nbsp;                        () -&gt; new ResourceNotFoundException(&quot;employee with id %s not found&quot;.formatted(id)));</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Employee addNewEmployee(EmployeeRegistrationRequest registrationRequest) {
+<b class="fc">&nbsp;        String email = registrationRequest.email();</b>
+<b class="fc">&nbsp;        if (employeeDao.existsEmployeeWithEmail(email)) {</b>
+<b class="nc">&nbsp;            throw new EmailValidationReportException(&quot;email already used&quot;);</b>
+&nbsp;
+&nbsp;        }
+<b class="fc">&nbsp;        Employee employee = new Employee(</b>
+<b class="fc">&nbsp;                registrationRequest.name(),</b>
+<b class="fc">&nbsp;                registrationRequest.surname(),</b>
+<b class="fc">&nbsp;                registrationRequest.email(),</b>
+<b class="fc">&nbsp;                registrationRequest.isPermanent(),</b>
+<b class="fc">&nbsp;                registrationRequest.age(),</b>
+<b class="fc">&nbsp;                registrationRequest.occupation(),</b>
+<b class="fc">&nbsp;                registrationRequest.salary()</b>
+&nbsp;        );
+&nbsp;
+&nbsp;//        if (!employee.isPermanent()) {
+&nbsp;//            throw new RegistrationValidationException(&quot;Sorry we are registering only permanent employees&quot;);
+&nbsp;//        }
+&nbsp;
+<b class="fc">&nbsp;       return employeeDao.insertEmployee(employee);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public Employee updateEmployee(Long EmployeeId, EmployeeUpdateRequest employeeUpdate) {
+&nbsp;
+<b class="nc">&nbsp;        Employee employees = getEmployeeById(EmployeeId);</b>
+<b class="nc">&nbsp;        boolean update = false;</b>
+&nbsp;//
+&nbsp;//        if (employeeUpdate.id() != 0 &amp;&amp; !employeeUpdate.id().equals(employees.getId())) {
+&nbsp;////            if (employeeDao.existsEmployeeWithId(employeeUpdate.id())) {
+&nbsp;////                throw new IdVerificationResponse(&quot;id %s in use&quot;.formatted(employeeUpdate.id()));
+&nbsp;////            }
+&nbsp;//            employees.setId(employeeUpdate.id());
+&nbsp;//            update = true;
+&nbsp;//        }
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        if (employeeUpdate.name() != null &amp;&amp; !employeeUpdate.name().equals(employees.getName())) {</b>
+<b class="nc">&nbsp;            employees.setName(employeeUpdate.name());</b>
+<b class="nc">&nbsp;            update = true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (employeeUpdate.surname() != null &amp;&amp; !employeeUpdate.surname().equals(employees.getSurname())) {</b>
+<b class="nc">&nbsp;            employees.setSurname(employeeUpdate.surname());</b>
+<b class="nc">&nbsp;            update = true;</b>
+&nbsp;
+&nbsp;        }
+<b class="nc">&nbsp;        if (employeeUpdate.email() != null &amp;&amp; !employeeUpdate.email().equals(employees.getEmail())) {</b>
+<b class="nc">&nbsp;            if (employeeDao.existsEmployeeWithEmail(employeeUpdate.email())) {</b>
+<b class="nc">&nbsp;                throw new EmailValidationReportException(&quot;email is in use&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            employees.setEmail(employeeUpdate.email());</b>
+<b class="nc">&nbsp;            update = true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!employeeUpdate.isPermanent()) {</b>
+<b class="nc">&nbsp;            employees.setPermanent(true);</b>
+<b class="nc">&nbsp;            update = true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (employeeUpdate.age() &gt;= 0) {</b>
+<b class="nc">&nbsp;            employees.setAge(employeeUpdate.age());</b>
+<b class="nc">&nbsp;            update = true;</b>
+&nbsp;
+&nbsp;        }
+<b class="nc">&nbsp;        if (employeeUpdate.salary() != null &amp;&amp; !employeeUpdate.salary().equals(employees.getSalary())) {</b>
+<b class="nc">&nbsp;            employees.setSalary(employeeUpdate.salary());</b>
+<b class="nc">&nbsp;            update = true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (employeeUpdate.occupation() != null &amp;&amp; !employeeUpdate.occupation().equals(employees.getOccupation())) {</b>
+<b class="nc">&nbsp;            employees.setOccupation(employeeUpdate.occupation());</b>
+<b class="nc">&nbsp;            update = true;</b>
+<b class="nc">&nbsp;            System.out.println(&quot;Update status: &quot; + update);</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (!update) {</b>
+<b class="nc">&nbsp;            throw new RegistrationValidationException(&quot;no updates were made&quot;);</b>
+&nbsp;
+&nbsp;        }
+<b class="nc">&nbsp;       return employeeDao.updateEmployee(employees);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void deleteEmployeeById(Long employeeId) {
+<b class="nc">&nbsp;        if (!employeeDao.existsEmployeeWithId(employeeId)){</b>
+<b class="nc">&nbsp;            throw new IdVerificationResponse(&quot;no employee with such id found&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        employeeDao.deleteEmployee(employeeId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Optional&lt;Employee&gt; getMostPaidEmployee() {
+<b class="nc">&nbsp;        if (employeeDao == null){</b>
+<b class="nc">&nbsp;            throw new ResourceNotFoundException(&quot;No such Employee found&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return employeeDao.findHighestEarningEmployee()</b>
+<b class="nc">&nbsp;                .stream()</b>
+<b class="nc">&nbsp;                .max(Comparator.comparing(Employee::getSalary));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Optional&lt;Employee&gt; getLowestPaidEmployee(){
+<b class="nc">&nbsp;        if (employeeDao == null){</b>
+<b class="nc">&nbsp;            throw new ResourceNotFoundException(&quot;No employee found&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;     return employeeDao.findLowestEarningEmployee()</b>
+<b class="nc">&nbsp;              .stream()</b>
+<b class="nc">&nbsp;              .min(Comparator.comparing(Employee::getSalary));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getTotalOfAllSalaries(){
+<b class="nc">&nbsp;        return employeeDao.getTotalOfSalaries()</b>
+<b class="nc">&nbsp;                .stream()</b>
+<b class="nc">&nbsp;                .map(Employee::getSalary)</b>
+<b class="nc">&nbsp;                .mapToDouble(BigDecimal::doubleValue)</b>
+<b class="nc">&nbsp;                .sum();</b>
+&nbsp;       }
+&nbsp;
+&nbsp;       public Employee increaseSalaries(Employee employee) {
+<b class="nc">&nbsp;        boolean change = false;</b>
+<b class="nc">&nbsp;      if(!Objects.equals(employee.getSalary(), new BigDecimal(2500).add(new BigDecimal(1500)))){</b>
+<b class="nc">&nbsp;          change = true;</b>
+<b class="nc">&nbsp;          System.out.println(&quot;salary changed&quot;);</b>
+&nbsp;      }
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;           if (!change){</b>
+<b class="nc">&nbsp;               throw new IllegalArgumentException(&quot;salary not changed&quot;);</b>
+&nbsp;           }
+&nbsp;
+<b class="nc">&nbsp;           return employeeDao.increaseSalariesOfEmployees(employee);</b>
+&nbsp;       }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-08 18:49</div>
+</div>
+</body>
+</html>

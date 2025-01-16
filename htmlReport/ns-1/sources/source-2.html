@@ -1,0 +1,229 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > EmployeeListDataAccessService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fiskhumalo.employeeManagement.service</a>
+</div>
+
+<h1>Coverage Summary for Class: EmployeeListDataAccessService (com.fiskhumalo.employeeManagement.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EmployeeListDataAccessService</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/32)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fiskhumalo.employeeManagement.service;
+&nbsp;
+&nbsp;import com.fiskhumalo.employeeManagement.dao.employeeDao.EmployeeDao;
+&nbsp;import com.fiskhumalo.employeeManagement.model.employee.Employee;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;public class EmployeeListDataAccessService implements EmployeeDao {</b>
+&nbsp;    private static final List&lt;List&lt;Employee&gt;&gt; employeeList;
+&nbsp;
+&nbsp;    static {
+<b class="nc">&nbsp;        employeeList = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        Employee employee1 = new Employee(</b>
+&nbsp;                &quot;Thoko&quot;, &quot;Sibanda&quot;, &quot;thok@fiskhumalo.com&quot;, true, 34, &quot;Deli&quot;, new BigDecimal(7500));
+<b class="nc">&nbsp;        Employee employee2 = new Employee(</b>
+&nbsp;                &quot;Lungi&quot;, &quot;Shabalala&quot;, &quot;lungi@fiskhumalo.com&quot;, true, 36, &quot;Deli&quot;, new BigDecimal(6500));
+<b class="nc">&nbsp;        Employee employee3 = new Employee(</b>
+&nbsp;                &quot;Ayanda&quot;, &quot;Sibanda&quot;, &quot;ayanda@fiskhumalo.com&quot;, false, 22, &quot;Deli&quot;, new BigDecimal(5500));
+<b class="nc">&nbsp;        Employee employee4 = new Employee(</b>
+&nbsp;                &quot;Magret&quot;, &quot;Nyoni&quot;, &quot;mag@fiskhumalo.com&quot;, true, 44, &quot;Waiters&quot;, new BigDecimal(2500));
+<b class="nc">&nbsp;        Employee employee5 = new Employee(</b>
+&nbsp;                &quot;Thabani&quot;, &quot;Dube&quot;, &quot;thaban@fiskhumalo.com&quot;, true, 42, &quot;Waiters&quot;, new BigDecimal(2500));
+<b class="nc">&nbsp;        Employee employee6 = new Employee(</b>
+&nbsp;                &quot;Phili&quot;, &quot;Ndebele&quot;, &quot;phili@fiskhumalo.com&quot;, false, 30, &quot;Greek-section&quot;, new BigDecimal(6400));
+<b class="nc">&nbsp;        Employee employee7 = new Employee(</b>
+&nbsp;                &quot;Netty&quot;, &quot;Ndlovu&quot;, &quot;netty@fiskhumalo.com&quot;, true, 33, &quot;Greek-section&quot;, new BigDecimal(6800));
+<b class="nc">&nbsp;        Employee employee8 = new Employee(</b>
+&nbsp;                &quot;Lucky&quot;, &quot;Ncube&quot;, &quot;lucky@fiskhumalo.com&quot;, true, 32, &quot;Chef&quot;, new BigDecimal(7100));
+<b class="nc">&nbsp;        Employee employee9 = new Employee(</b>
+&nbsp;                &quot;Crisman&quot;, &quot;Ncube&quot;, &quot;cris@fiskhumalo.com&quot;, false, 35, &quot;Chef&quot;, new BigDecimal(6900));
+<b class="nc">&nbsp;        Employee employee00 = new Employee(</b>
+&nbsp;                &quot;Maria&quot;, &quot;Sibanda&quot;, &quot;maria@fiskhumalo.com&quot;, true, 54, &quot;Greek-Food&quot;, new BigDecimal(8500));
+<b class="nc">&nbsp;        Employee employee01 = new Employee(</b>
+&nbsp;                &quot;Toni&quot;, &quot;Bestakos&quot;, &quot;toni@fiskhumalo.com&quot;, true, 49, &quot;Manager&quot;, new BigDecimal(13500));
+<b class="nc">&nbsp;        Employee employee02 = new Employee(</b>
+&nbsp;                &quot;Shepherd&quot;, &quot;Ndlovu&quot;, &quot;shepered@fiskhumalo.com&quot;, false, 37, &quot;Manager&quot;, new BigDecimal(9800));
+<b class="nc">&nbsp;        Employee employee03 = new Employee(</b>
+&nbsp;                &quot;Sicelo&quot;, &quot;Tshuma&quot;, &quot;sicelo@fiskhumalo.com&quot;, false, 30, &quot;Salads&quot;, new BigDecimal(6800));
+<b class="nc">&nbsp;        Employee employee04 = new Employee(</b>
+&nbsp;                &quot;Virginia&quot;, &quot;Makadzi&quot;, &quot;vig@fiskhumalo.com&quot;, true, 48, &quot;Manager&quot;, new BigDecimal(10800));
+<b class="nc">&nbsp;        Employee employee05 = new Employee(</b>
+&nbsp;                &quot;Nkosi&quot;, &quot;Ndlovu&quot;, &quot;nkosi@fiskhumalo.com&quot;, true, 27, &quot;Scalery&quot;, new BigDecimal(5800));
+<b class="nc">&nbsp;        Employee employee06 = new Employee(</b>
+&nbsp;                &quot;Bongi&quot;, &quot;Sibanda&quot;, &quot;bongi@fiskhumalo.com&quot;, true, 39, &quot;Bakery&quot;, new BigDecimal(8800));
+<b class="nc">&nbsp;        Employee employee07 = new Employee(</b>
+&nbsp;                &quot;Ciphers&quot;, &quot;Sibanda&quot;, &quot;ciphers@fiskhumalo.com&quot;, false, 57, &quot;Bakery&quot;, new BigDecimal(9800));
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Employee&gt; employees = List.of(employee1, employee2, employee3, employee4, employee5,</b>
+&nbsp;                employee6, employee7, employee8, employee9, employee00,
+&nbsp;                employee01, employee02, employee03, employee04, employee05, employee06, employee07);
+&nbsp;
+<b class="nc">&nbsp;    employeeList.add(employees);</b>
+&nbsp;
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;Employee&gt; getAllEmployees() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Optional&lt;Employee&gt; getEmployeeById(Long id) {
+<b class="nc">&nbsp;        return Optional.empty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Employee insertEmployee(Employee employee) {
+&nbsp;
+<b class="nc">&nbsp;        return employee;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean existsEmployeeWithEmail(String email) {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Employee updateEmployee(Employee employee) {
+&nbsp;
+<b class="nc">&nbsp;        return employee;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean existsEmployeeWithId(Long id) {
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void deleteEmployee(Long employeeId) {
+&nbsp;
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;Employee&gt; findHighestEarningEmployee() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;Employee&gt; findLowestEarningEmployee() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;Employee&gt; getTotalOfSalaries() {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Employee increaseSalariesOfEmployees(Employee employee) {
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+&nbsp;
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-08 18:49</div>
+</div>
+</body>
+</html>

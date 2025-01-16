@@ -1,0 +1,1 @@
+INSERT INTO employee(name surname , email, age ,occupation, salary,permanent)VALUES
