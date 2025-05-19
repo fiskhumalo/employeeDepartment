@@ -26,7 +26,7 @@ public class ManagerService {
         Long id = managerRegistration.managerId();
 
         if (managerDao.existsManagerWithId(id)) {
-            throw new RegistrationValidationException("id already taken");
+            throw new RegistrationValidationException("This id already taken");
 
         }
             Manager manager = new Manager(
